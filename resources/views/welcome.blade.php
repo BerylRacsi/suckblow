@@ -83,13 +83,13 @@
                     <a href="/register">User</a>
                     <a href="/register/partner">Partner</a>
                     <a href="/register/admin">Admin</a>
-                </div>
+                </div><br>
 
                 <div class="links">
-                    <a href="/gear">User</a>
-                    <a href="/course">Partner</a>
+                    <a href="/gear">User Trip</a>
                     <a href="/usertrip">Admin</a>
                     <a href="/partnertrip">Admin</a>
+                    <a href="/course">Partner Trip</a>
                 </div>
             </div>
         </div>
