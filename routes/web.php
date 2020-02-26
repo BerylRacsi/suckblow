@@ -27,14 +27,23 @@ Route::post('/login/partner', 'Auth\LoginController@partnerLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('register.admin');
 Route::post('/register/partner', 'Auth\RegisterController@createPartner')->name('register.partner');
 
+/*User*/
 Route::view('/home', 'home')->middleware('auth');
-Route::group(['middleware' => 'auth:admin'], function () {
-    Route::view('/admin', 'admin');
-});
 
+/*Partner*/
 Route::group(['middleware' => 'auth:partner'], function () {
     Route::view('/partner', 'partner');
 });
+
+/*Admin*/
+Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
+	Route::get('/','AdminPanelController@index');
+
+    Route::resource('admin-account','AdminController');
+});
+/*Route::group(['middleware' => 'auth:admin'], function () {
+    Route::view('/admin', 'admin');
+});*/
 
 Route::resource('gear','GearController');
 Route::resource('course','CourseController');
