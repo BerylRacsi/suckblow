@@ -83,13 +83,6 @@
                     <a href="/register">User</a>
                     <a href="/register/partner">Partner</a>
                     <a href="/register/admin">Admin</a>
-                </div><br>
-
-                <div class="links">
-                    <a href="/usertrip">User Trip</a>
-                    <a href="/gear">Gear</a>
-                    <a href="/course">Course</a>
-                    <a href="/partnertrip">Partner Trip</a>
                 </div>
             </div>
         </div>

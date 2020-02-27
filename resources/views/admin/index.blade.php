@@ -11,14 +11,16 @@
 				<!-- small box -->
 				<div class="small-box bg-info">
 					<div class="inner">
-						<h3>150</h3>
+						<h3>0</h3>
 
-						<p>New Orders</p>
+						<p>Gear</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-bag"></i>
+						<i class="ion ion-tshirt"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{url('admin/gear')}}" class="small-box-footer">
+						More info <i class="fas fa-arrow-circle-right"></i>
+					</a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -26,14 +28,14 @@
 				<!-- small box -->
 				<div class="small-box bg-success">
 					<div class="inner">
-						<h3>53<sup style="font-size: 20px">%</sup></h3>
+						<h3>0</h3>
 
-						<p>Bounce Rate</p>
+						<p>Course</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-stats-bars"></i>
+						<i class="ion ion-android-contacts"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{url('admin/course')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -41,14 +43,14 @@
 				<!-- small box -->
 				<div class="small-box bg-warning">
 					<div class="inner">
-						<h3>44</h3>
+						<h3>0</h3>
 
-						<p>User Registrations</p>
+						<p>Trip by User</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-person-add"></i>
+						<i class="ion ion-android-boat"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{url('admin/usertrip')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -56,14 +58,14 @@
 				<!-- small box -->
 				<div class="small-box bg-danger">
 					<div class="inner">
-						<h3>65</h3>
+						<h3>0</h3>
 
-						<p>Unique Visitors</p>
+						<p>Trip by Partner</p>
 					</div>
 					<div class="icon">
-						<i class="ion ion-pie-graph"></i>
+						<i class="ion ion-android-plane"></i>
 					</div>
-					<a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+					<a href="{{url('admin/partnertrip')}}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
 				</div>
 			</div>
 			<!-- ./col -->
@@ -74,7 +76,7 @@
 				<!-- PRODUCT LIST -->
 				<div class="card">
 					<div class="card-header">
-						<h3 class="card-title">Recently Added Products</h3>
+						<h3 class="card-title">Recently Added Advertisements</h3>
 
 						<div class="card-tools">
 							<button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -93,10 +95,10 @@
 									<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
 								</div>
 								<div class="product-info">
-									<a href="javascript:void(0)" class="product-title">Samsung TV
-										<span class="badge badge-warning float-right">$1800</span></a>
+									<a href="javascript:void(0)" class="product-title">Diving Mask
+										<span class="badge badge-info float-right">Rp 1.500.000</span></a>
 										<span class="product-description">
-											Samsung 32" 1080p 60Hz LED Smart HDTV.
+											in <strong>Gear</strong>
 										</span>
 									</div>
 								</li>
@@ -106,10 +108,10 @@
 										<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
 									</div>
 									<div class="product-info">
-										<a href="javascript:void(0)" class="product-title">Bicycle
-											<span class="badge badge-info float-right">$700</span></a>
+										<a href="javascript:void(0)" class="product-title">Scuba Diving
+											<span class="badge badge-success float-right">Rp 750.000</span></a>
 											<span class="product-description">
-												26" Mongoose Dolomite Men's 7-speed, Navy Blue.
+												in <strong>Course</strong>
 											</span>
 										</div>
 									</li>
@@ -120,12 +122,13 @@
 										</div>
 										<div class="product-info">
 											<a href="javascript:void(0)" class="product-title">
-												Xbox One <span class="badge badge-danger float-right">
-													$350
+												A Trip to Maldives 
+												<span class="badge badge-danger float-right">
+													Rp 75.000.000
 												</span>
 											</a>
 											<span class="product-description">
-												Xbox One Console Bundle with Halo Master Chief Collection.
+												in <strong>Trip by Partner</strong>
 											</span>
 										</div>
 									</li>
@@ -135,10 +138,11 @@
 											<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
 										</div>
 										<div class="product-info">
-											<a href="javascript:void(0)" class="product-title">PlayStation 4
-												<span class="badge badge-success float-right">$399</span></a>
+											<a href="javascript:void(0)" class="product-title">
+												Deep Ocean Exploration
+												<span class="badge badge-warning float-right">Rp 30.000.000</span></a>
 												<span class="product-description">
-													PlayStation 4 500GB Console (PS4)
+													in <strong>Trip by User</strong>
 												</span>
 											</div>
 										</li>
@@ -146,10 +150,6 @@
 									</ul>
 								</div>
 								<!-- /.card-body -->
-								<div class="card-footer text-center">
-									<a href="javascript:void(0)" class="uppercase">View All Products</a>
-								</div>
-								<!-- /.card-footer -->
 							</div>
 							<!-- /.card -->
 						</div>
@@ -159,10 +159,9 @@
 							<!-- USERS LIST -->
 							<div class="card">
 								<div class="card-header">
-									<h3 class="card-title">Latest Members</h3>
+									<h3 class="card-title">Latest Users</h3>
 
 									<div class="card-tools">
-										<span class="badge badge-danger">8 New Members</span>
 										<button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
 										</button>
 										<button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i>
@@ -216,10 +215,6 @@
 									<!-- /.users-list -->
 								</div>
 								<!-- /.card-body -->
-								<div class="card-footer text-center">
-									<a href="javascript::">View All Users</a>
-								</div>
-								<!-- /.card-footer -->
 							</div>
 							<!--/.card -->
 						</div>
