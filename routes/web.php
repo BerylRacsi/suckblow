@@ -47,6 +47,15 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
 	Route::resource('course','CourseController');
 	Route::resource('usertrip','UserTripController');
 	Route::resource('partnertrip','PartnerTripController');
+
+	Route::get('/manage/agency','ManageController@showAgencyList');
+	Route::get('/manage/facility','ManageController@showFacilityList');
+
+	Route::get('/manage/agency/create','ManageController@showAgencyForm');
+	Route::get('/manage/facility/create','ManageController@showFacilityForm');
+
+	Route::post('/manage/agency/store','ManageController@storeAgency');
+	Route::post('/manage/facility/store','ManageController@storeFacility');
 });
 /*Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');

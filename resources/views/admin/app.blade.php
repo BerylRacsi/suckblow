@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>AdminLTE 3 | Dashboard 2</title>
-
+    <title>Suck Blow | Admin Panel</title>
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- DataTables -->
@@ -109,7 +110,7 @@
             <a href="index3.html" class="brand-link">
                 <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                 style="opacity: .8">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <span class="brand-text font-weight-light">Suck Blow</span>
             </a>
 
             <!-- Sidebar -->
@@ -229,13 +230,13 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{url('admin/manage/agency')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Dive Agency</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{url('admin/manage/facility')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Trip Facility</p>
                                     </a>
