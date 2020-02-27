@@ -38,7 +38,7 @@ class PartnerTripController extends Controller
     {
         $trips = PartnerTrip::all();
 
-        return view('partnertrip/index',compact('trips'));
+        return view('admin/advertisement/partnertrip/index',compact('trips'));
     }
 
     /**
@@ -51,7 +51,7 @@ class PartnerTripController extends Controller
         $agencies = Agency::all();
         $facilities = Facility::all();
 
-        return view('partnertrip/create',compact('agencies','facilities'));
+        return view('admin/advertisement/partnertrip/create',compact('agencies','facilities'));
     }
 
     /**
@@ -148,13 +148,13 @@ class PartnerTripController extends Controller
         }
 
         else {
-            return redirect('partnertrip/create')
+            return redirect('admin/partnertrip/create')
                         ->withErrors('You need to upload at least 1 image.');
         }
 
         $trip->save();
 
-        return redirect()->intended('partnertrip')->with('status','Your ads has been submitted.');
+        return redirect()->intended('admin/partnertrip')->with('status','Your ads has been submitted.');
     }
 
     /**
@@ -194,7 +194,7 @@ class PartnerTripController extends Controller
             $facilityArray[$key] = NULL;
         }
 
-        return view('partnertrip/detail',compact('trip','agencies','facilities','agencyArray','facilityArray'));
+        return view('admin/advertisement/partnertrip/detail',compact('trip','agencies','facilities','agencyArray','facilityArray'));
     }
 
     /**
@@ -234,7 +234,7 @@ class PartnerTripController extends Controller
             $facilityArray[$key] = NULL;
         }
 
-        return view('partnertrip/edit',compact('trip','agencies','facilities','agencyArray','facilityArray'));
+        return view('admin/advertisement/partnertrip/edit',compact('trip','agencies','facilities','agencyArray','facilityArray'));
     }
 
     /**
@@ -327,7 +327,7 @@ class PartnerTripController extends Controller
 
         $trip->save();
 
-        return redirect()->intended('partnertrip')->with('status','Your ads has been edited successfuly.');
+        return redirect()->intended('admin/partnertrip')->with('status','Your ads has been edited successfuly.');
     }
 
     /**
@@ -347,6 +347,6 @@ class PartnerTripController extends Controller
         
         File::delete($trip->logo);
         $trip->delete();
-        return redirect('partnertrip')->with('status', 'Ads Removed!');
+        return redirect('admin/partnertrip')->with('status', 'Ads Removed!');
     }
 }

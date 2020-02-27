@@ -35,7 +35,7 @@ class GearController extends Controller
     {
         $gears = Gear::all();
 
-        return view ('gear/index',compact('gears'));
+        return view ('admin/advertisement/gear/index',compact('gears'));
     }
 
     /**
@@ -45,7 +45,7 @@ class GearController extends Controller
      */
     public function create()
     {
-        return view('gear/create');
+        return view('admin/advertisement/gear/create');
     }
 
     /**
@@ -105,7 +105,7 @@ class GearController extends Controller
         }
 
         else {
-            return redirect('gear/create')
+            return redirect('admin/gear/create')
                         ->withErrors('You need to upload at least 1 image.');
         }
 
@@ -122,7 +122,7 @@ class GearController extends Controller
             'image'  => $stringpath,
         ]);
 
-        return redirect()->intended('gear')->with('status','Your ads has been submitted.');
+        return redirect()->intended('admin/gear')->with('status','Your ads has been submitted.');
     }
 
     /**
@@ -135,7 +135,7 @@ class GearController extends Controller
     {
         $gear = Gear::find($id);
 
-        return view('gear/detail',compact('gear'));
+        return view('admin/advertisement/gear/detail',compact('gear'));
     }
 
     /**
@@ -148,7 +148,7 @@ class GearController extends Controller
     {
         $gear = Gear::find($id);
 
-        return view('gear/edit',compact('gear'));
+        return view('admin/advertisement/gear/edit',compact('gear'));
     }
 
     /**
@@ -216,7 +216,7 @@ class GearController extends Controller
         }
         $gear->save();
 
-        return redirect()->intended('gear')->with('status','Your ads has been edited successfuly.');
+        return redirect()->intended('admin/gear')->with('status','Your ads has been edited successfuly.');
     }
 
     /**
@@ -236,6 +236,6 @@ class GearController extends Controller
 
         $gear->delete();
 
-        return redirect()->intended('gear')->with('status','Ads removed successfully!');
+        return redirect()->intended('admin/gear')->with('status','Ads removed successfully!');
     }
 }

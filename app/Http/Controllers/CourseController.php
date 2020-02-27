@@ -43,9 +43,9 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $course = Course::all();
+        $courses = Course::all();
 
-        return view('course/index',compact('course'));
+        return view('admin/advertisement/course/index',compact('courses'));
     }
 
     /**
@@ -57,7 +57,7 @@ class CourseController extends Controller
     {
         $agencies = Agency::all();
 
-        return view('course/create',compact('agencies'));
+        return view('admin/advertisement/course/create',compact('agencies'));
     }
 
     /**
@@ -109,7 +109,7 @@ class CourseController extends Controller
         $course->save();
         //dd($course);
 
-        return redirect()->intended('course')->with('status','Your ads has been submitted.');
+        return redirect()->intended('admin/course')->with('status','Your ads has been submitted.');
     }
 
     /**
@@ -122,7 +122,7 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
 
-        return view('course/detail',compact('course'));
+        return view('admin/advertisement/course/detail',compact('course'));
     }
 
     /**
@@ -136,7 +136,7 @@ class CourseController extends Controller
         $course = Course::find($id);
         $agencies = Agency::all();
 
-        return view('course/edit',compact('course','agencies'));
+        return view('admin/advertisement/course/edit',compact('course','agencies'));
     }
 
     /**
@@ -187,7 +187,7 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->intended('course')->with('status','Your ads has been edited successfuly.');
+        return redirect()->intended('admin/course')->with('status','Your ads has been edited successfuly.');
     }
 
     /**
@@ -205,6 +205,6 @@ class CourseController extends Controller
         
         $course->delete();
 
-        return redirect()->intended('course')->with('status','Ads removed successfully!');
+        return redirect()->intended('admin/course')->with('status','Ads removed successfully!');
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 
 @section('content')
 <div class="container">
@@ -9,11 +9,11 @@
 
                 <div class="card-body">
                     <div class="card-body">
-                    <form method="POST" action="{{action('UserTripController@update',$trip->id)}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{action('PartnerTripController@update',$trip->id)}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Title</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Company Name</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name"  placeholder="Trip Title" value="{{$trip->name}}" required autofocus>
@@ -74,11 +74,12 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="length" class="col-md-4 col-form-label text-md-right">Trip Duration</label>
-                            <div class="col-md-2">
-                                <input class="form-control @error('length') is-invalid @enderror" type="number" name="length" value="{{$trip->length}}" min="1" max="35000">
+                            <label for="address" class="col-md-4 col-form-label text-md-right">Address</label>
 
-                                @error('length')
+                            <div class="col-md-6">
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address"  placeholder="Detailed Address" value="{{$trip->address}}" required>
+
+                                @error('location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -87,12 +88,53 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="itinerary" class="col-md-4 col-form-label text-md-right">Trip Itinerary
-                            	<p class="text-muted" align="left">* Only upload if you need to change the image, otherwise leave it blank.</p>
-                            </label>
+                            <label for="since" class="col-md-4 col-form-label text-md-right">Operate Since</label>
+                            <div class="col-md-2">
+                                <input class="form-control @error('Operate Since') is-invalid @enderror" type="number" name="since" value="{{$trip->since}}" min="1900" max="2020">
+
+                                @error('since')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="agency" class="col-md-4 col-form-label text-md-right">Agency</label>
+
+                            <div class="col-md-6" style="padding-top: 5px">
+                                @foreach($agencies as $key => $agency)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="{{$agency->name}}" name="agency[]" id="agency{{$agency->id}}" {{$agencyArray[$key]}}>
+                                    <label class="form-check-label" for="">
+                                        {{$agency->name}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="facility" class="col-md-4 col-form-label text-md-right">Facility</label>
+
+                            <div class="col-md-6" style="padding-top: 5px">
+                                @foreach($facilities as $key => $facility)
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="checkbox" value="{{$facility->name}}" name="facility[]" id="facility{{$facility->id}}" {{$facilityArray[$key]}}>
+                                    <label class="form-check-label" for="">
+                                        {{$facility->name}}
+                                    </label>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="logo" class="col-md-4 col-form-label text-md-right">Company Logo</label>
 
                             <div class="col-md-6">
-                                <input type="file" name="itinerary" class="form-control-file">
+                                <input type="file" name="logo" class="form-control-file">
                                 @if (count($errors) > 0)
                                     <div class="alert alert-danger">
                                         Please correct following errors:
@@ -109,7 +151,7 @@
                         <div class="form-group row">
                             <label for="image" class="col-md-4 col-form-label text-md-right">
                                 Upload Photos
-                                <p class="text-muted" align="left">* Maximum 5 images allowed<br>* Only upload if you need to change the images, otherwise leave it blank.</p>
+                                <p class="text-muted">* Maximum 5 images allowed</p>
                             </label>
 
                             <div class="col-md-6">

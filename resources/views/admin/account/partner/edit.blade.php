@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.app')
 
 @section('content')
 
@@ -6,17 +6,17 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Partner {{ __('Register') }}</div>
+                <div class="card-header">Edit Partner Account</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ url('register/partner') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{action('PartnerController@update',$partner->id)}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">Company</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{$partner->name}}" required autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -30,7 +30,7 @@
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{$partner->email}}" required>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                             <label for="phone" class="col-md-4 col-form-label text-md-right">{{ __('Phone Number') }}</label>
 
                             <div class="col-md-6">
-                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required>
+                                <input id="phone" type="text" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{$partner->phone}}" required>
 
                                 @error('phone')
                                     <span class="invalid-feedback" role="alert">
@@ -55,33 +55,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required>
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
                             <label for="category" class="col-md-4 col-form-label text-md-right">{{ __('Store Category') }}</label>
 
                             <div class="col-md-6">
                                 <select id="category" name="category" class="form-control" required>
-                                    <option value="" disabled selected>Select Store Category</option>
+                                    <option value="{{$partner->category}}" selected>{{$partner->category}}</option>
                                     <option value="gear">Gear</option>
                                     <option value="trip">Trip</option>
                                     <option value="course">Course</option>
@@ -94,7 +72,7 @@
 
                             <div class="col-md-6">
                                 <select id="country" name="country" class="form-control" required>
-                                    <option value="" disabled selected>Select Country</option>
+                                    <option value="{{$partner->country}}" selected>{{$partner->country}}</option>
                                     <option value="Afganistan">Afghanistan</option>
                                     <option value="Albania">Albania</option>
                                     <option value="Algeria">Algeria</option>
@@ -349,7 +327,7 @@
                             <label for="province" class="col-md-4 col-form-label text-md-right">{{ __('Province') }}</label>
 
                             <div class="col-md-6">
-                                <input id="province" type="text" class="form-control @error('province') is-invalid @enderror" name="province" value="{{ old('province') }}" required>
+                                <input id="province" type="text" class="form-control @error('province') is-invalid @enderror" name="province" value="{{$partner->province}}" required>
 
                                 @error('province')
                                     <span class="invalid-feedback" role="alert">
@@ -363,7 +341,7 @@
                             <label for="city" class="col-md-4 col-form-label text-md-right">{{ __('City') }}</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{ old('city') }}" required>
+                                <input id="city" type="text" class="form-control @error('city') is-invalid @enderror" name="city" value="{{$partner->city}}" required>
 
                                 @error('city')
                                     <span class="invalid-feedback" role="alert">
@@ -377,7 +355,7 @@
                             <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required>
+                                <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{$partner->address}}" required>
 
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
@@ -405,10 +383,11 @@
                             </div>
                         </div>
 
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                    Edit
                                 </button>
                             </div>
                         </div>

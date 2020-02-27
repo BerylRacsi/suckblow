@@ -40,12 +40,15 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
 	Route::get('/','AdminPanelController@index');
 
     Route::resource('admin-account','AdminController');
+    Route::resource('user-account','UserController');
+    Route::resource('partner-account','PartnerController');
+
+    Route::resource('gear','GearController');
+	Route::resource('course','CourseController');
+	Route::resource('usertrip','UserTripController');
+	Route::resource('partnertrip','PartnerTripController');
 });
 /*Route::group(['middleware' => 'auth:admin'], function () {
     Route::view('/admin', 'admin');
 });*/
 
-Route::resource('gear','GearController');
-Route::resource('course','CourseController');
-Route::resource('usertrip','UserTripController');
-Route::resource('partnertrip','PartnerTripController');

@@ -18,7 +18,7 @@ class UserTripController extends Controller
             'description' => ['required','max:255'],
             'price' => ['required','numeric','max:1000000000000','min:100'],
             'location' => ['required','string'],
-            'duration' => ['required','numeric','max:100','min:1'],
+            'length' => ['required','numeric','max:100','min:1'],
 
             'itinerary' => 'image|mimes:jpeg,png,jpg|max:1024',
             'image.*' => 'image|mimes:jpeg,png,jpg|max:1024',
@@ -34,7 +34,7 @@ class UserTripController extends Controller
     {
         $trips = UserTrip::all();
 
-        return view('usertrip/index',compact('trips'));
+        return view('admin/advertisement/usertrip/index',compact('trips'));
     }
 
     /**
@@ -44,7 +44,7 @@ class UserTripController extends Controller
      */
     public function create()
     {
-        return view('usertrip/create');
+        return view('admin/advertisement/usertrip/create');
     }
 
     /**
@@ -122,12 +122,12 @@ class UserTripController extends Controller
         }
 
         else {
-            return redirect('usertrip/create')
+            return redirect('admin/usertrip/create')
                         ->withErrors('You need to upload at least 1 image.');
         }
         $trip->save();
 
-        return redirect()->intended('usertrip')->with('status','Your ads has been submitted.');
+        return redirect()->intended('admin/usertrip')->with('status','Your ads has been submitted.');
     }
 
     /**
@@ -140,7 +140,7 @@ class UserTripController extends Controller
     {
         $trip = UserTrip::find($id);
 
-        return view('usertrip/detail',compact('trip'));
+        return view('admin/advertisement/usertrip/detail',compact('trip'));
     }
 
     /**
@@ -153,7 +153,7 @@ class UserTripController extends Controller
     {
         $trip = UserTrip::find($id);
 
-        return view('usertrip/edit',compact('trip'));
+        return view('admin/advertisement/usertrip/edit',compact('trip'));
     }
 
     /**
@@ -231,7 +231,7 @@ class UserTripController extends Controller
 
         $trip->save();
 
-        return redirect()->intended('usertrip')->with('status','Your ads has been edited successfuly.');
+        return redirect()->intended('admin/usertrip')->with('status','Your ads has been edited successfuly.');
     }
 
     /**
@@ -251,6 +251,6 @@ class UserTripController extends Controller
         
         File::delete($trip->itinerary);
         $trip->delete();
-        return redirect('usertrip')->with('status', 'Ads Removed!');
+        return redirect('admin/usertrip')->with('status', 'Ads Removed!');
     }
 }

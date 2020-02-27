@@ -142,7 +142,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{url('admin/gear')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All</p>
                                     </a>
@@ -171,7 +171,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{url('admin/course')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>All</p>
                                     </a>
@@ -206,13 +206,13 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{url('admin/partnertrip')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Partner</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="#" class="nav-link">
+                                    <a href="{{url('admin/usertrip')}}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>User</p>
                                     </a>
@@ -246,7 +246,7 @@
                     <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-header">Account</li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{url('/admin/admin-account')}}" class="nav-link">
                                 <i class="nav-icon fas fa-circle"></i>
                                 <p>
                                     Administrator
@@ -254,7 +254,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{url('/admin/partner-account')}}" class="nav-link">
                                 <i class="nav-icon fas fa-circle"></i>
                                 <p>
                                     Partner
@@ -262,7 +262,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{url('/admin/user-account')}}" class="nav-link">
                                 <i class="nav-icon fas fa-circle"></i>
                                 <p>
                                     User
@@ -341,11 +341,8 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+            <strong>Copyright &copy; 2020 <a href="http://adminlte.io">suckblow.com</a>.</strong>
                 All rights reserved.
-                <div class="float-right d-none d-sm-inline-block">
-                    <b>Version</b> 3.0.2
-                </div>
         </footer>
 
         
