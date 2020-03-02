@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use File;
 use Image;
+use Auth;
 use App\PartnerTrip;
 use App\Agency;
 use App\Facility;
@@ -38,7 +38,17 @@ class PartnerTripController extends Controller
     {
         $trips = PartnerTrip::all();
 
-        return view('admin/advertisement/partnertrip/index',compact('trips'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/partnertrip/index',compact('trips'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('partnertrip/index',compact('url','trips'));
+        }
+        else{
+            $url = "user";
+            return view('partnertrip/index',compact('url','trips'));
+        }
     }
 
     /**
@@ -51,7 +61,17 @@ class PartnerTripController extends Controller
         $agencies = Agency::all();
         $facilities = Facility::all();
 
-        return view('admin/advertisement/partnertrip/create',compact('agencies','facilities'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/partnertrip/create',compact('agencies','facilities'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('partnertrip/create',compact('url','agencies','facilities'));
+        }
+        else{
+            $url = "user";
+            return view('partnertrip/create',compact('url','agencies','facilities'));
+        }
     }
 
     /**
@@ -147,14 +167,30 @@ class PartnerTripController extends Controller
             $trip->image = $stringpath;
         }
 
-        else {
-            return redirect('admin/partnertrip/create')
-                        ->withErrors('You need to upload at least 1 image.');
+        else{
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/partnertrip/create')
+                    ->withErrors('You need to upload at least 1 image.');
+            }
+            else if(Auth::guard('partner')->check()){
+                return redirect()->intended('partner/partnertrip/create')->withErrors('You need to upload at least 1 image.');
+            }
+            else{
+                return redirect()->intended('user/partnertrip/create')->withErrors('You need to upload at least 1 image.');    
+            }
         }
 
         $trip->save();
 
-        return redirect()->intended('admin/partnertrip')->with('status','Your ads has been submitted.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/partnertrip')->with('status','Your ads has been submitted.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/partnertrip')->with('status','Your ads has been submitted.');
+        }
+        else{
+            return redirect()->intended('user/partnertrip`')->with('status','Your ads has been submitted.');
+        }
     }
 
     /**
@@ -194,7 +230,17 @@ class PartnerTripController extends Controller
             $facilityArray[$key] = NULL;
         }
 
-        return view('admin/advertisement/partnertrip/detail',compact('trip','agencies','facilities','agencyArray','facilityArray'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/partnertrip/detail',compact('trip','agencies','facilities','agencyArray','facilityArray'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('partnertrip/detail',compact('url','trip','agencies','facilities','agencyArray','facilityArray'));
+        }
+        else{
+            $url = "user";
+            return view('partnertrip/detail',compact('url','trip','agencies','facilities','agencyArray','facilityArray'));
+        }
     }
 
     /**
@@ -234,7 +280,17 @@ class PartnerTripController extends Controller
             $facilityArray[$key] = NULL;
         }
 
-        return view('admin/advertisement/partnertrip/edit',compact('trip','agencies','facilities','agencyArray','facilityArray'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/partnertrip/edit',compact('trip','agencies','facilities','agencyArray','facilityArray'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('partnertrip/edit',compact('url','trip','agencies','facilities','agencyArray','facilityArray'));
+        }
+        else{
+            $url = "user";
+            return view('partnertrip/edit',compact('url','trip','agencies','facilities','agencyArray','facilityArray'));
+        }
     }
 
     /**
@@ -327,7 +383,15 @@ class PartnerTripController extends Controller
 
         $trip->save();
 
-        return redirect()->intended('admin/partnertrip')->with('status','Your ads has been edited successfuly.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/partnertrip')->with('status','Ads edited successfuly.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/partnertrip')->with('status','Ads edited successfuly.');
+        }
+        else{
+            return redirect()->intended('user/partnertrip`')->with('status','Ads edited successfuly.');
+        }
     }
 
     /**
@@ -347,6 +411,15 @@ class PartnerTripController extends Controller
         
         File::delete($trip->logo);
         $trip->delete();
-        return redirect('admin/partnertrip')->with('status', 'Ads Removed!');
+
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/partnertrip')->with('status','Ads removed.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/partnertrip')->with('status','Ads removed.');
+        }
+        else{
+            return redirect()->intended('user/partnertrip')->with('status','Ads removed.');
+        }
     }
 }

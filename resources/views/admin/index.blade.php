@@ -140,12 +140,29 @@
 										<div class="product-info">
 											<a href="javascript:void(0)" class="product-title">
 												Deep Ocean Exploration
-												<span class="badge badge-warning float-right">Rp 30.000.000</span></a>
-												<span class="product-description">
-													in <strong>Trip by User</strong>
-												</span>
-											</div>
-										</li>
+												<span class="badge badge-warning float-right">Rp 30.000.000</span>
+											</a>
+											<span class="product-description">
+												in <strong>Trip by User</strong>
+											</span>
+										</div>
+									</li>
+										<!-- /.item -->
+										<!-- /.item -->
+									<li class="item">
+										<div class="product-img">
+											<img src="dist/img/default-150x150.png" alt="Product Image" class="img-size-50">
+										</div>
+										<div class="product-info">
+											<a href="javascript:void(0)" class="product-title">
+												Deep Ocean Exploration
+												<span class="badge badge-warning float-right">Rp 30.000.000</span>
+											</a>
+											<span class="product-description">
+												in <strong>Trip by User</strong>
+											</span>
+										</div>
+									</li>
 										<!-- /.item -->
 									</ul>
 								</div>

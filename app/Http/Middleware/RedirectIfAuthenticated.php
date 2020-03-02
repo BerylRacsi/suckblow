@@ -21,10 +21,10 @@ class RedirectIfAuthenticated
             return redirect('/admin');
         }
         if ($guard == "partner" && Auth::guard($guard)->check()) {
-            return redirect('/partner');
+            return redirect('partner/home');
         }
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            return redirect('user/home');
         }
 
         return $next($request);

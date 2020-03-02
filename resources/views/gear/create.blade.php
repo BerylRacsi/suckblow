@@ -8,7 +8,7 @@
                 <div class="card-header">Add Gear Ads</div>
                 
                 <div class="card-body">
-                    <form method="POST" action="{{action('GearController@store')}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url($url.'/gear/')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

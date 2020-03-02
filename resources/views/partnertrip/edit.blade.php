@@ -9,7 +9,7 @@
 
                 <div class="card-body">
                     <div class="card-body">
-                    <form method="POST" action="{{action('PartnerTripController@update',$trip->id)}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url($url.'/partnertrip/'.$trip->id)}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

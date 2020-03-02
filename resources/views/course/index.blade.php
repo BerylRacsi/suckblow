@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header">
                     Course Ads List -
-                    <a class="btn btn-success btn-sm" href="{{url('/course/create')}}">Post Ads</a>
+                    <a class="btn btn-success btn-sm" href="{{url($url.'/course/create')}}">Post Ads</a>
                 </div>
 
                 <div class="card-body">
@@ -26,15 +26,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($course as $course)
+                            @foreach($courses as $course)
                             <tr>
-                                <td><a href="/course/{{$course->id}}">{{$course->name}}</a></td>
+                                <td><a href="{{url($url.'/course/'.$course->id)}}">{{$course->name}}</a></td>
                                 <td>{{$course->diver}}</td>
                                 <td>{{$course->agency}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm btn-block" href="course/{{$course->id}}/edit">Edit</a>
+                                    <a class="btn btn-primary btn-sm btn-block" href="{{url($url.'/course/'.$course->id.'/edit')}}">Edit</a>
                                     <br>
-                                    <form action="{{action('CourseController@destroy', $course->id)}}" method="POST">
+                                    <form action="{{url($url.'/course/'.$course->id)}}" method="POST">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button class="btn btn-sm btn-block btn-danger" type="submit" >

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use File;
 use Image;
 use App\Course;
@@ -45,7 +46,17 @@ class CourseController extends Controller
     {
         $courses = Course::all();
 
-        return view('admin/advertisement/course/index',compact('courses'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/course/index',compact('courses'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('course/index',compact('url','courses'));
+        }
+        else{
+            $url = "user";
+            return view('course/index',compact('url','courses'));
+        }
     }
 
     /**
@@ -57,7 +68,17 @@ class CourseController extends Controller
     {
         $agencies = Agency::all();
 
-        return view('admin/advertisement/course/create',compact('agencies'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/course/create',compact('agencies'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('course/create',compact('url','agencies'));
+        }
+        else{
+            $url = "user";
+            return view('course/create',compact('url','agencies'));
+        }
     }
 
     /**
@@ -105,11 +126,30 @@ class CourseController extends Controller
             
             $course->image = $image_path;
         }
+        else{
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/course/create')
+                    ->withErrors('You need to upload an image.');
+            }
+            else if(Auth::guard('partner')->check()){
+                return redirect()->intended('partner/course/create')->withErrors('You need to upload an image.');
+            }
+            else{
+                return redirect()->intended('user/course/create')->withErrors('You need to upload an image.');    
+            }
+        }
 
         $course->save();
-        //dd($course);
 
-        return redirect()->intended('admin/course')->with('status','Your ads has been submitted.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/course')->with('status','Your ads has been submitted.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/course')->with('status','Your ads has been submitted.');
+        }
+        else{
+            return redirect()->intended('user/course')->with('status','Your ads has been submitted.');
+        }
     }
 
     /**
@@ -122,7 +162,17 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
 
-        return view('admin/advertisement/course/detail',compact('course'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/course/detail',compact('course'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('course/detail',compact('url','course'));
+        }
+        else{
+            $url = "user";
+            return view('course/detail',compact('url','course'));
+        }
     }
 
     /**
@@ -136,7 +186,17 @@ class CourseController extends Controller
         $course = Course::find($id);
         $agencies = Agency::all();
 
-        return view('admin/advertisement/course/edit',compact('course','agencies'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/course/create',compact('course','agencies'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('course/edit',compact('url','course','agencies'));
+        }
+        else{
+            $url = "user";
+            return view('course/edit',compact('url','course','agencies'));
+        }
     }
 
     /**
@@ -187,7 +247,15 @@ class CourseController extends Controller
 
         $course->save();
 
-        return redirect()->intended('admin/course')->with('status','Your ads has been edited successfuly.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/course')->with('status','Ads edited successfuly.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/course')->with('status','Ads edited successfuly.');
+        }
+        else{
+            return redirect()->intended('user/course')->with('status','Ads edited successfuly.');
+        }
     }
 
     /**
@@ -205,6 +273,14 @@ class CourseController extends Controller
         
         $course->delete();
 
-        return redirect()->intended('admin/course')->with('status','Ads removed successfully!');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/course')->with('status','Ads removed.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/course')->with('status','Ads removed.');
+        }
+        else{
+            return redirect()->intended('user/course')->with('status','Ads removed.');
+        }
     }
 }

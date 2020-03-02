@@ -12,7 +12,7 @@
             <div class="card">
                 <div class="card-header">
                     Gear Ads List -
-                    <a class="btn btn-success btn-sm" href="{{url('/gear/create')}}">Post Ads</a>
+                    <a class="btn btn-success btn-sm" href="{{url($url.'/gear/create')}}">Post Ads</a>
                 </div>
 
                 <div class="card-body">
@@ -21,20 +21,20 @@
                             <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Category</th>
-                                <th scope="col">Price</th>
+                                <th scope="cosl">Price</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach($gears as $gear)
                             <tr>
-                                <td><a href="/gear/{{$gear->id}}">{{$gear->name}}</a></td>
+                                <td><a href="{{url($url.'/gear/'.$gear->id)}}">{{$gear->name}}</a></td>
                                 <td>{{$gear->category}}</td>
                                 <td>{{$gear->price}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm btn-block" href="gear/{{$gear->id}}/edit">Edit</a>
+                                    <a class="btn btn-primary btn-sm btn-block" href="{{url($url.'/gear/'.$gear->id.'/edit')}}">Edit</a>
                                     <br>
-                                    <form action="{{action('GearController@destroy', $gear->id)}}" method="POST">
+                                    <form action="{{url($url.'/gear/'.$gear->id)}}" method="POST">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button class="btn btn-sm btn-block btn-danger" type="submit" >

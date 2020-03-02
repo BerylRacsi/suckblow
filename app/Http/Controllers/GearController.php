@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use File;
 use Image;
 use App\Gear;
@@ -19,8 +20,8 @@ class GearController extends Controller
             'price' => ['required','numeric','max:1000000000000','min:100'],
             'category' => ['required','string'],
             'link' => ['required', 'string', 'max:50'],
-            'condition' => ['required', 'boolean'],
-            'warranty' => ['required', 'boolean'],
+            'condition' => ['boolean'],
+            'warranty' => ['boolean'],
 
             'image.*' => 'image|mimes:jpeg,png,jpg|max:1024'
         ]);
@@ -35,7 +36,17 @@ class GearController extends Controller
     {
         $gears = Gear::all();
 
-        return view ('admin/advertisement/gear/index',compact('gears'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/gear/index',compact('gears'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('gear/index',compact('url','gears'));
+        }
+        else{
+            $url = "user";
+            return view('gear/index',compact('url','gears'));
+        }
     }
 
     /**
@@ -45,7 +56,17 @@ class GearController extends Controller
      */
     public function create()
     {
-        return view('admin/advertisement/gear/create');
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/gear/create');
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('gear/create',compact('url'));
+        }
+        else{
+            $url = "user";
+            return view('gear/create',compact('url'));
+        }
     }
 
     /**
@@ -55,7 +76,7 @@ class GearController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         if (isset($request['condition']) && $request['condition'] == "true") {
             $request['condition'] = TRUE;
         }
@@ -72,6 +93,14 @@ class GearController extends Controller
 
         $this->Validator($request->all())->validate();
 
+        $gear = new Gear;
+        $gear->name = $request->input('name');
+        $gear->description = $request->input('description');
+        $gear->price = $request->input('price');
+        $gear->condition = $request->input('condition');
+        $gear->warranty = $request->input('warranty');
+        $gear->link = $request->input('link');
+        $gear->category = $request->input('category');
 
         if ($request->hasFile('image')) {
             $images = $request->file('image');
@@ -102,27 +131,37 @@ class GearController extends Controller
                        })->save($org_path);
                 }
             }
+            $stringpath = implode(',', $path);
+            $gear->image = $stringpath;
+
         }
 
         else {
-            return redirect('admin/gear/create')
-                        ->withErrors('You need to upload at least 1 image.');
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/gear/create')
+                    ->withErrors('You need to upload at least 1 image.');
+            }
+            else if(Auth::guard('partner')->check()){
+                return redirect()->intended('partner/gear/create')->withErrors('You need to upload at least 1 image.');
+            }
+            else{
+                return redirect()->intended('user/gear/create')->withErrors('You need to upload at least 1 image.');    
+            }
         }
 
-        $stringpath = implode(',', $path);
+        $gear->save();
 
-        Gear::create([
-            'name' => $request['name'],
-            'description' => $request['description'],
-            'price' => $request['price'],
-            'condition' => $request['condition'],
-            'warranty' => $request['warranty'],
-            'link' => $request['link'],
-            'category' => $request['category'],
-            'image'  => $stringpath,
-        ]);
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/gear')->with('status','Your ads has been submitted.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/gear')->with('status','Your ads has been submitted.');
+        }
+        else{
+            return redirect()->intended('user/gear')->with('status','Your ads has been submitted.');
+        }
 
-        return redirect()->intended('admin/gear')->with('status','Your ads has been submitted.');
+        
     }
 
     /**
@@ -135,7 +174,17 @@ class GearController extends Controller
     {
         $gear = Gear::find($id);
 
-        return view('admin/advertisement/gear/detail',compact('gear'));
+        if(Auth::guard('admin')->check()){   
+            return view('admin/advertisement/gear/detail',compact('gear'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('gear/detail',compact('url','gear'));
+        }
+        else{
+            $url = "user";
+            return view('gear/detail',compact('url','gear'));
+        }
     }
 
     /**
@@ -148,7 +197,17 @@ class GearController extends Controller
     {
         $gear = Gear::find($id);
 
-        return view('admin/advertisement/gear/edit',compact('gear'));
+        if(Auth::guard('admin')->check()){   
+            return view('admin/advertisement/gear/edit',compact('gear'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('gear/edit',compact('url','gear'));
+        }
+        else{
+            $url = "user";
+            return view('gear/edit',compact('url','gear'));
+        }
     }
 
     /**
@@ -160,8 +219,6 @@ class GearController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $gear = Gear::find($id);
-
         if (isset($request['condition']) && $request['condition'] == "true") {
             $request['condition'] = TRUE;
         }
@@ -178,6 +235,7 @@ class GearController extends Controller
 
         $this->Validator($request->all())->validate();
 
+        $gear = Gear::find($id);
         $gear->name = $request->input('name');
         $gear->description = $request->input('description');
         $gear->price = $request->input('price');
@@ -214,9 +272,18 @@ class GearController extends Controller
             $stringpath = implode(',', $path);
             $gear->image = $stringpath;
         }
+        
         $gear->save();
 
-        return redirect()->intended('admin/gear')->with('status','Your ads has been edited successfuly.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/gear')->with('status','Ads edited successfuly.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/gear')->with('status','Ads edited successfuly.');
+        }
+        else{
+            return redirect()->intended('user/gear')->with('status','Ads edited successfuly.');
+        }
     }
 
     /**
@@ -236,6 +303,14 @@ class GearController extends Controller
 
         $gear->delete();
 
-        return redirect()->intended('admin/gear')->with('status','Ads removed successfully!');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/gear')->with('status','Ads removed.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/gear')->with('status','Ads removed.');
+        }
+        else{
+            return redirect()->intended('user/gear')->with('status','Ads removed.');
+        }
     }
 }

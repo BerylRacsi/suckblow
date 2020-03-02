@@ -8,7 +8,7 @@
                 <div class="card-header">Edit Course Ads</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{action('CourseController@update', $course->id)}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url($url.'/course/'.$course->id)}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use File;
 use Image;
+use Auth;
 use App\UserTrip;
 
 class UserTripController extends Controller
@@ -34,7 +35,17 @@ class UserTripController extends Controller
     {
         $trips = UserTrip::all();
 
-        return view('admin/advertisement/usertrip/index',compact('trips'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/usertrip/index',compact('trips'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('usertrip/index',compact('url','trips'));
+        }
+        else{
+            $url = "user";
+            return view('usertrip/index',compact('url','trips'));
+        }
     }
 
     /**
@@ -44,7 +55,17 @@ class UserTripController extends Controller
      */
     public function create()
     {
-        return view('admin/advertisement/usertrip/create');
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/usertrip/create');
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('usertrip/create',compact('url'));
+        }
+        else{
+            $url = "user";
+            return view('usertrip/create',compact('url'));
+        }
     }
 
     /**
@@ -86,8 +107,20 @@ class UserTripController extends Controller
 
             $trip->itinerary = $image_path;
         }
+        else{
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/usertrip/create')
+                    ->withErrors('You need to upload an image.');
+            }
+            else if(Auth::guard('partner')->check()){
+                return redirect()->intended('partner/usertrip/create')->withErrors('You need to upload an image.');
+            }
+            else{
+                return redirect()->intended('user/usertrip/create')->withErrors('You need to upload an image.');    
+            }
+        }
 
-        if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {       
             $images = $request->file('image');
  
             //setting flag for condition
@@ -122,12 +155,29 @@ class UserTripController extends Controller
         }
 
         else {
-            return redirect('admin/usertrip/create')
-                        ->withErrors('You need to upload at least 1 image.');
+            if(Auth::guard('admin')->check()){
+                return redirect('admin/usertrip/create')
+                    ->withErrors('You need to upload at least 1 image.');
+            }
+            else if(Auth::guard('partner')->check()){
+                return redirect()->intended('partner/usertrip/create')->withErrors('You need to upload at least 1 image.');
+            }
+            else{
+                return redirect()->intended('user/usertrip/create')->withErrors('You need to upload at least 1 image.');    
+            }
         }
+
         $trip->save();
 
-        return redirect()->intended('admin/usertrip')->with('status','Your ads has been submitted.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/usertrip')->with('status','Your ads has been submitted.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/usertrip')->with('status','Your ads has been submitted.');
+        }
+        else{
+            return redirect()->intended('user/usertrip')->with('status','Your ads has been submitted.');
+        }
     }
 
     /**
@@ -140,7 +190,17 @@ class UserTripController extends Controller
     {
         $trip = UserTrip::find($id);
 
-        return view('admin/advertisement/usertrip/detail',compact('trip'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/usertrip/detail',compact('trip'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('usertrip/detail',compact('url','trip'));
+        }
+        else{
+            $url = "user";
+            return view('usertrip/detail',compact('url','trip'));
+        }
     }
 
     /**
@@ -153,7 +213,17 @@ class UserTripController extends Controller
     {
         $trip = UserTrip::find($id);
 
-        return view('admin/advertisement/usertrip/edit',compact('trip'));
+        if(Auth::guard('admin')->check()){   
+            return view ('admin/advertisement/usertrip/edit',compact('trip'));
+        }
+        else if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('usertrip/edit',compact('url','trip'));
+        }
+        else{
+            $url = "user";
+            return view('usertrip/edit',compact('url','trip'));
+        }
     }
 
     /**
@@ -231,7 +301,15 @@ class UserTripController extends Controller
 
         $trip->save();
 
-        return redirect()->intended('admin/usertrip')->with('status','Your ads has been edited successfuly.');
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/usertrip')->with('status','Ads edited successfuly.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/usertrip')->with('status','Ads edited successfuly.');
+        }
+        else{
+            return redirect()->intended('user/usertrip')->with('status','Ads edited successfuly.');
+        }
     }
 
     /**
@@ -251,6 +329,15 @@ class UserTripController extends Controller
         
         File::delete($trip->itinerary);
         $trip->delete();
-        return redirect('admin/usertrip')->with('status', 'Ads Removed!');
+
+        if(Auth::guard('admin')->check()){   
+            return redirect()->intended('admin/usertrip')->with('status','Ads removed.');
+        }
+        else if(Auth::guard('partner')->check()){
+            return redirect()->intended('partner/usertrip')->with('status','Ads removed.');
+        }
+        else{
+            return redirect()->intended('user/usertrip')->with('status','Ads removed.');
+        }
     }
 }

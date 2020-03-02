@@ -27,17 +27,28 @@ Route::post('/login/partner', 'Auth\LoginController@partnerLogin');
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('register.admin');
 Route::post('/register/partner', 'Auth\RegisterController@createPartner')->name('register.partner');
 
-/*User*/
-Route::view('/home', 'home')->middleware('auth');
 
-/*Partner*/
-Route::group(['middleware' => 'auth:partner'], function () {
-    Route::view('/partner', 'partner');
+Route::group(['prefix' => 'user','middleware' => 'auth'], function () {
+	Route::get('home','StoreController@index');
+
+    Route::resource('gear','GearController');
+	Route::resource('course','CourseController');
+	Route::resource('usertrip','UserTripController');
+	Route::resource('partnertrip','PartnerTripController')->only(['index','show']);
+});
+
+Route::group(['prefix' => 'partner','middleware' => 'auth:partner'], function () {
+	Route::get('home','StoreController@index');
+
+    Route::resource('gear','GearController');
+	Route::resource('course','CourseController');
+	Route::resource('usertrip','UserTripController')->only(['index','show']);
+	Route::resource('partnertrip','PartnerTripController');
 });
 
 /*Admin*/
 Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
-	Route::get('/','AdminPanelController@index');
+	Route::view('/','admin/index');
 
     Route::resource('admin-account','AdminController');
     Route::resource('user-account','UserController');
@@ -57,7 +68,3 @@ Route::group(['prefix' => 'admin','middleware' => 'auth:admin'], function () {
 	Route::post('/manage/agency/store','ManageController@storeAgency');
 	Route::post('/manage/facility/store','ManageController@storeFacility');
 });
-/*Route::group(['middleware' => 'auth:admin'], function () {
-    Route::view('/admin', 'admin');
-});*/
-

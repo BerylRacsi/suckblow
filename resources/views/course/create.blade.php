@@ -8,7 +8,7 @@
                 <div class="card-header">Add Course Ads</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{action('CourseController@store')}}" enctype="multipart/form-data">
+                    <form method="POST" action="{{url($url.'/course/')}}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">

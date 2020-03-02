@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     User Trip Ads List -
-                    <a class="btn btn-success btn-sm" href="{{url('/usertrip/create')}}">Post Ads</a>
+                    <a class="btn btn-success btn-sm" href="{{url($url.'/usertrip/create')}}">Post Ads</a>
                 </div>
 
                 <div class="card-body">
@@ -23,13 +23,13 @@
                         <tbody>
                             @foreach($trips as $trip)
                             <tr>
-                                <td><a href="/usertrip/{{$trip->id}}">{{$trip->name}}</a></td>
+                                <td><a href="{{url($url.'/usertrip/'.$trip->id)}}">{{$trip->name}}</a></td>
                                 <td>{{$trip->location}}</td>
                                 <td>{{$trip->price}}</td>
                                 <td>
-                                    <a class="btn btn-primary btn-sm btn-block" href="usertrip/{{$trip->id}}/edit">Edit</a>
+                                    <a class="btn btn-primary btn-sm btn-block" href="{{url($url.'/usertrip/'.$trip->id.'/edit')}}">Edit</a>
                                     <br>
-                                    <form action="{{action('UserTripController@destroy', $trip->id)}}" method="POST">
+                                    <form action="{{url($url.'/usertrip/'.$trip->id)}}" method="POST">
                                         @csrf
                                         <input name="_method" type="hidden" value="DELETE">
                                         <button class="btn btn-sm btn-block btn-danger" type="submit" >
