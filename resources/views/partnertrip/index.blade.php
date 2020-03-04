@@ -6,8 +6,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Partner Trip Ads List -
-                    <a class="btn btn-success btn-sm" href="{{url($url.'/partnertrip/create')}}">Post Ads</a>
+                    Partner Trip Ads List 
+                    <!-- -
+                    <a class="btn btn-success btn-sm" href="{{url($url.'/partnertrip/create')}}">Post Ads</a> -->
                 </div>
 
                 <div class="card-body">

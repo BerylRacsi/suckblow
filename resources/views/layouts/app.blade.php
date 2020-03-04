@@ -49,6 +49,30 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                @if(Auth::guard('partner')->check())
+                                    <a href="{{url('/partner/home')}}" class="nav-link">
+                                        <strong>Ads List</strong>
+                                    </a>
+                                @else
+                                    <a href="{{url('/user/home')}}" class="nav-link">
+                                        <strong>Ads List</strong>
+                                    </a>
+                                @endif
+                                
+                            </li>
+                            <li class="nav-item">
+                                @if(Auth::guard('partner')->check())
+                                    <a href="{{url('/partner/select')}}" class="nav-link">
+                                        <strong>Post Ads</strong>
+                                    </a>
+                                @else
+                                    <a href="{{url('/user/select')}}" class="nav-link">
+                                        <strong>Post Ads</strong>
+                                    </a>
+                                @endif
+                                
+                            </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>

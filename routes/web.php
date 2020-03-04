@@ -30,6 +30,8 @@ Route::post('/register/partner', 'Auth\RegisterController@createPartner')->name(
 
 Route::group(['prefix' => 'user','middleware' => 'auth'], function () {
 	Route::get('home','StoreController@index');
+	Route::get('trip','StoreController@trip');
+	Route::get('select','StoreController@select');
 
     Route::resource('gear','GearController');
 	Route::resource('course','CourseController');
@@ -39,6 +41,8 @@ Route::group(['prefix' => 'user','middleware' => 'auth'], function () {
 
 Route::group(['prefix' => 'partner','middleware' => 'auth:partner'], function () {
 	Route::get('home','StoreController@index');
+	Route::get('trip','StoreController@trip');
+	Route::get('select','StoreController@select');
 
     Route::resource('gear','GearController');
 	Route::resource('course','CourseController');

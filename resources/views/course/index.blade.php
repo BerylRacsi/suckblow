@@ -11,8 +11,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Course Ads List -
-                    <a class="btn btn-success btn-sm" href="{{url($url.'/course/create')}}">Post Ads</a>
+                    Course Ads List 
+                    <!-- -
+                    <a class="btn btn-success btn-sm" href="{{url($url.'/course/create')}}">Post Ads</a> -->
                 </div>
 
                 <div class="card-body">

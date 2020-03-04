@@ -11,8 +11,9 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Gear Ads List -
-                    <a class="btn btn-success btn-sm" href="{{url($url.'/gear/create')}}">Post Ads</a>
+                    Gear Ads List 
+                    <!-- -
+                    <a class="btn btn-success btn-sm" href="{{url($url.'/gear/create')}}">Post Ads</a> -->
                 </div>
 
                 <div class="card-body">

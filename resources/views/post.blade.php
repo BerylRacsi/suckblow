@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Select Ads to View</div>
+                <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
                      <div class="row">
@@ -13,7 +13,7 @@
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">Gear</h5>
-                                        <a href="{{url($url.'/gear')}}" class="btn btn-primary">View Ads</a>
+                                        <a href="{{url($url.'/gear/create')}}" class="btn btn-primary">Sell Gear</a>
                                 </div>
                             </div>
                          </div>
@@ -21,7 +21,7 @@
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">Course</h5>
-                                        <a href="{{url($url.'/course')}}" class="btn btn-primary">View Ads</a>
+                                        <a href="{{url($url.'/course/create')}}" class="btn btn-primary">Sell Course</a>
                                 </div>
                             </div>
                          </div>
@@ -29,7 +29,7 @@
                             <div class="card text-center">
                                 <div class="card-body">
                                     <h5 class="card-title">Trip</h5>
-                                        <a href="{{url($url.'/trip')}}" class="btn btn-primary">View Ads</a>
+                                        <a href="{{url($url.'/trip')}}" class="btn btn-primary">Sell Trip</a>
                                 </div>
                             </div>
                          </div>
