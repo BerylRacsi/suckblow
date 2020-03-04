@@ -125,6 +125,10 @@ class PartnerController extends Controller
     {
         $partner = Partner::find($id);
 
+        $image = $partner->image;
+
+        File::delete($image);
+
         $partner->delete();
 
         return redirect()->intended('admin/partner-account')->with('status','Account removed');

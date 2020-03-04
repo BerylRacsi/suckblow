@@ -121,6 +121,10 @@ class UserController extends Controller
     {
         $user = User::find($id);
 
+        $image = $user->image;
+
+        File::delete($image);
+
         $user->delete();
 
         return redirect()->intended('admin/user-account')->with('status','Account removed');
