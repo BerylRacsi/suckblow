@@ -429,7 +429,7 @@
         <div class="col-md-6 col-lg-4 col-xl-3">
           <div class="card text-center card-product">
             <div class="card-product__img">
-              <img class="card-img" src="{{asset('images/diving-3.jpg')}}" alt="">
+              <img class="card-img" src="{{asset('img/diving-3.jpg')}}" alt="">
               <ul class="card-product__imgOverlay">
                   <a href="{{url($url.'/course/')}}"><strong>View More</strong></a>
               </ul>
