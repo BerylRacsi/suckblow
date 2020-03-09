@@ -173,10 +173,10 @@ class UserTripController extends Controller
             return redirect()->intended('admin/usertrip')->with('status','Your ads has been submitted.');
         }
         else if(Auth::guard('partner')->check()){
-            return redirect()->intended('partner/usertrip')->with('status','Your ads has been submitted.');
+            return redirect()->intended('partner/trip')->with('status','Your ads has been submitted.');
         }
         else{
-            return redirect()->intended('user/usertrip')->with('status','Your ads has been submitted.');
+            return redirect()->intended('user/trip')->with('status','Your ads has been submitted.');
         }
     }
 
@@ -305,10 +305,10 @@ class UserTripController extends Controller
             return redirect()->intended('admin/usertrip')->with('status','Ads edited successfuly.');
         }
         else if(Auth::guard('partner')->check()){
-            return redirect()->intended('partner/usertrip')->with('status','Ads edited successfuly.');
+            return redirect()->intended('partner/trip')->with('status','Ads edited successfuly.');
         }
         else{
-            return redirect()->intended('user/usertrip')->with('status','Ads edited successfuly.');
+            return redirect()->intended('user/trip')->with('status','Ads edited successfuly.');
         }
     }
 
@@ -334,10 +334,10 @@ class UserTripController extends Controller
             return redirect()->intended('admin/usertrip')->with('status','Ads removed.');
         }
         else if(Auth::guard('partner')->check()){
-            return redirect()->intended('partner/usertrip')->with('status','Ads removed.');
+            return redirect()->intended('partner/trip')->with('status','Ads removed.');
         }
         else{
-            return redirect()->intended('user/usertrip')->with('status','Ads removed.');
+            return redirect()->intended('user/trip')->with('status','Ads removed.');
         }
     }
 }
