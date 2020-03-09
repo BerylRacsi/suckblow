@@ -87,7 +87,7 @@
             <div class="owl-carousel owl-theme s_Product_carousel">
                 @foreach (explode(',', $gear->image) as $image)
               <div class="single-prd-item">
-                        <img src="{{ url('/',$image) }}" alt="IMG-PRODUCT" >
+                        <img src="{{ asset('/'.$image) }}" alt="IMG-PRODUCT" >
               </div>
                 @endforeach
             </div>
