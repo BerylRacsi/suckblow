@@ -165,7 +165,7 @@
                             <tr>
                                 <th>Photo</th>
                                 <td>
-                                    <img src="{{ url('/',$course->image) }}" alt="IMG-PRODUCT" width="150" height="150">
+                                    <img src="{{ asset('/'.$course->image) }}" alt="IMG-PRODUCT" width="150" height="150">
                                 </td>
                             </tr>
                         </tbody>
