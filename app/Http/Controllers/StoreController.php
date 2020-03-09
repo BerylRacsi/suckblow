@@ -50,5 +50,18 @@ class StoreController extends Controller
             return view('select',compact('url'));
         }
     }
+
+    public function about()
+    {
+        return view('about');
+    }
+    public function contact()
+    {
+        return view('contact');
+    }
+    public function blog()
+    {
+        return view('blog');
+    }
 }
  
