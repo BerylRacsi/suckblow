@@ -119,7 +119,7 @@
                             <tr>
                                 <th>Itinerary</th>
                                 <td>
-                                    <img src="{{ url('/',$trip->itinerary) }}" alt="IMG-PRODUCT" width="150" height="150">
+                                    <img src="{{ asset('/'.$trip->itinerary) }}" alt="IMG-PRODUCT" width="150" height="150">
                                 </td>
                             </tr>
                         </tbody>
