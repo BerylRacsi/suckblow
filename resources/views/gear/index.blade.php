@@ -159,7 +159,7 @@
                             <div class="card text-center card-product">
                                 <div class="card-product__img">
                                     @foreach (explode(',', $gear->image) as $image)
-                                        <img class="card-img" src="{{ asset('/',$image) }}" alt="IMG-PRODUCT">       @break
+                                        <img class="card-img" src="{{ asset('/'.$image) }}" alt="IMG-PRODUCT">       @break
                                     @endforeach
                                 </div>
                                 <div class="card-body">
