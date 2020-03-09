@@ -45,17 +45,18 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
+        $agencies = Agency::all();
 
         if(Auth::guard('admin')->check()){   
             return view ('admin/advertisement/course/index',compact('courses'));
         }
         else if(Auth::guard('partner')->check()){
             $url = "partner";
-            return view('course/index',compact('url','courses'));
+            return view('course/index',compact('url','courses','agencies'));
         }
         else{
             $url = "user";
-            return view('course/index',compact('url','courses'));
+            return view('course/index',compact('url','courses','agencies'));
         }
     }
 
@@ -145,10 +146,10 @@ class CourseController extends Controller
             return redirect()->intended('admin/course')->with('status','Your ads has been submitted.');
         }
         else if(Auth::guard('partner')->check()){
-            return redirect()->intended('partner/course')->with('status','Your ads has been submitted.');
+            return redirect()->intended('partner/agency')->with('status','Your ads has been submitted.');
         }
         else{
-            return redirect()->intended('user/course')->with('status','Your ads has been submitted.');
+            return redirect()->intended('user/agency')->with('status','Your ads has been submitted.');
         }
     }
 
@@ -251,10 +252,10 @@ class CourseController extends Controller
             return redirect()->intended('admin/course')->with('status','Ads edited successfuly.');
         }
         else if(Auth::guard('partner')->check()){
-            return redirect()->intended('partner/course')->with('status','Ads edited successfuly.');
+            return redirect()->intended('partner/agency')->with('status','Ads edited successfuly.');
         }
         else{
-            return redirect()->intended('user/course')->with('status','Ads edited successfuly.');
+            return redirect()->intended('user/agency')->with('status','Ads edited successfuly.');
         }
     }
 
@@ -277,10 +278,10 @@ class CourseController extends Controller
             return redirect()->intended('admin/course')->with('status','Ads removed.');
         }
         else if(Auth::guard('partner')->check()){
-            return redirect()->intended('partner/course')->with('status','Ads removed.');
+            return redirect()->intended('partner/agency')->with('status','Ads removed.');
         }
         else{
-            return redirect()->intended('user/course')->with('status','Ads removed.');
+            return redirect()->intended('user/agency')->with('status','Ads removed.');
         }
     }
 }

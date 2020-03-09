@@ -121,11 +121,11 @@
       <div class="categories_details">
         <div class="categories_text">
             @if(Auth::guard('partner')->check())
-                <a href="{{url('/partner/course')}}">
+                <a href="{{url('/partner/agency')}}">
                     <h5>Course</h5>
                 </a>
             @else
-                <a href="{{url('/user/course')}}">
+                <a href="{{url('/user/agency')}}">
                     <h5>Course</h5>
                 </a>
             @endif

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Agency;
 use App\Gear;
 use App\Course;
 use App\UserTrip;
@@ -48,6 +49,20 @@ class StoreController extends Controller
         else{
             $url = "user";
             return view('select',compact('url'));
+        }
+    }
+
+    public function agency()
+    {
+        $agencies = Agency::all();
+
+        if(Auth::guard('partner')->check()){
+            $url = "partner";
+            return view('agency',compact('url','agencies'));
+        }
+        else{
+            $url = "user";
+            return view('agency',compact('url','agencies'));
         }
     }
 
